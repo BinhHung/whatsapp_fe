@@ -5,7 +5,7 @@ const initialState={
     error: "",
     user: {
         id:"",
-        name:"Binh Hung",
+        name:"",
         email:"",
         picture:"",
         status:"",
@@ -28,7 +28,6 @@ export const userSlice = createSlice({
                 status:"",
                 token:"",
             };
-
         }
     },
 });
