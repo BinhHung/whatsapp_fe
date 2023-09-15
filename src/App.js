@@ -9,7 +9,7 @@ import Register from "./pages/register";
 
 
 function App() {
-  const {user} = useSelector((state) => state.user);
+  const {user} = useSelector((state) =>({...state}));
   console.log(user);
   return (
     <div className="dark">
