@@ -46,7 +46,7 @@ export default function Picture({readablePicture, setReadablePicture, setPicture
                     className="mt-2 w-20 py-1 dark:bg-dark_bg_3 rounded-md text-xs font-bold flex items-center justify-center cursor-pointer "
                     onClick={()=>handleChangePic()}
                  >
-                    Remove or change
+                    Remove
                  </div>
 
             </div>
