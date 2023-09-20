@@ -23,6 +23,7 @@ export default function RegisterForm(){
         watch, 
         formState: {errors},
     } = useForm({
+        resolver: yupResolver(signUpSchema),
     });
     const onSubmit = async (data) => {
         dispatch(changeStatus("loading"));
@@ -59,7 +60,7 @@ export default function RegisterForm(){
                {/*Heading*/}
                <div className="text-center dark: text-dark_text_1">
                   <h2 className="mt-6 text-3x1 font-bold">Welcome</h2>
-                  <p className="mt-2 text-sm">Sign in</p>
+                  <p className="mt-2 text-sm">Sign up</p>
                </div>
                {/*Form*/}
                <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
@@ -110,12 +111,12 @@ export default function RegisterForm(){
                     type="submit">
                         {status == "loading" ? <PulseLoader color= "#fff" size={16}/> : "Sign up"}
                     </button>
-                    {/* Sign in link*/}
+                    {/* Sign up link*/}
                     <p className="flex flex-col items-center justify-center mt-10 text-center text-md dark:text-dark_text_1">
                         <span>Have an account?</span>
                         <Link href="/login"
                              className=" hover:underline cursor-pointer transition ease-in duration-300">
-                            Sign in
+                            Sign up
                         </Link>
                     </p>
                 </form>
