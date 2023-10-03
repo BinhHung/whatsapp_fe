@@ -45,6 +45,7 @@ export default function RegisterForm(){
         }
        
     };
+    // Cloudinary
     const uploadImage = async () => {
         let formData = new FormData();
         formData.append("upload_preset", cloud_secret);
@@ -114,9 +115,9 @@ export default function RegisterForm(){
                     {/* Sign up link*/}
                     <p className="flex flex-col items-center justify-center mt-10 text-center text-md dark:text-dark_text_1">
                         <span>Have an account?</span>
-                        <Link href="/login"
+                        <Link to="/login" 
                              className=" hover:underline cursor-pointer transition ease-in duration-300">
-                            Sign up
+                            Sign in
                         </Link>
                     </p>
                 </form>

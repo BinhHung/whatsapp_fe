@@ -79,7 +79,7 @@ export const userSlice = createSlice({
         })
         .addCase(loginUser.pending,(state,action)=>{
             state.status="loading";
-        })
+        })  
         .addCase(loginUser.fulfilled,(state,action)=>{
             state.status = "succeeded";
             state.error = "";
