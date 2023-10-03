@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import {ChatIcon, CommunityIcon, DotsIcon, StoryIcon} from "../../../svg"
 
 export default function SidebarHeader() {
-  const {user}=useSelector((state)=>state.user)
+  const {user}=useSelector((state)=>state.user);
   return (
     <div className="h-[50px] dark:bg-dark_bg_2 flex items-center p16 ">
         {/**Container */}
@@ -39,5 +39,5 @@ export default function SidebarHeader() {
           </ul>
         </div>
     </div>
-  )
+  );
 }
