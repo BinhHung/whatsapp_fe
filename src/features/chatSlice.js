@@ -20,7 +20,6 @@ export const getConversations = createAsyncThunk(
         const {data} = await axios.get(CONVERSATION_ENDPOINT,{
             headers:{
                 Authorization: `Bearer ${token}`,
-
             },
         });
         return data;
