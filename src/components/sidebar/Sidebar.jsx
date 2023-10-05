@@ -3,6 +3,8 @@ import {SidebarHeader} from "./header";
 import {Notifications} from "./notifications";
 import {Search} from "./search";
 import { Conversations } from "./conversations";
+import {SearchResults} from "./search";
+
 
 export default function Sidebar() {
   const [searchResults, setSearchResults] = useState([]);
@@ -16,9 +18,22 @@ export default function Sidebar() {
         {/**Search*/}
         <Search 
           searchLength={searchResults.length}
-          setSearchResults={setSearchResults}/>
-        {/**Conversations */}
-        <Conversations/>
+          setSearchResults={setSearchResults}
+        />
+        {
+          searchResults.length > 0 ? (
+          <>
+            {/**Search reasults */}
+            <SearchResults searchResults={searchResults}/>
+          </>
+          ) :  (
+            <>
+            {/**Conversations */}
+             <Conversations/>
+            </>
+          )
+        }
+        
     </div>
   )
 }
