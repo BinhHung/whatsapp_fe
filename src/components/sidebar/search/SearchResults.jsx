@@ -6,7 +6,7 @@ export default function SearchResults({searchResults}) {
       <div>
         {/**Heading*/}
         <div className="flex flex-col px-8 pt-8">
-          <h1 className="font-extralight text-md text-green_2">Contacts</h1>
+          <h1 className="font-extralight text-md text-white">Contacts</h1>
           <span className="w-full mt-4 ml-10 border-b dark:border-b-dark_bg_1"></span>
         </div>
         {/**Results */}

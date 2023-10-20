@@ -6,9 +6,9 @@ import { WhatsappHome } from "../components/chat";
 
 export default function Home(){
     const dispatch = useDispatch();
-    const {user} = useSelector((state) => state.user);
-    const {activeConversation} = useSelector((state) => state.chat);
-
+    const { user } = useSelector((state) => state.user);
+    const { activeConversation } = useSelector((state) => state.chat);
+    console.log("activeConversation",activeConversation);
     
 //get conversations
     useEffect(() => {
@@ -17,12 +17,12 @@ export default function Home(){
         }
     }, [user]);
     return(
-        <div className="min-h-screen dark:bg-dark_bg_1 flex items-center justify-center py-[19px] overflow-hidden">
+        <div className="h-screen dark:bg-dark_bg_1 flex items-center justify-center py-[19px] overflow-hidden">
             {/*container */}
             <div className="container h-screen flex py-[19px]">
                 {/**sidebar */}
                 <Sidebar />
-                { activeConversation._id ? "home" : <WhatsappHome /> }
+                {activeConversation._id ? "Home" : <WhatsappHome />}
             </div>
         </div>
     )
