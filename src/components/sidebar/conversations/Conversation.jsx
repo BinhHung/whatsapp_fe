@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {dateHandler} from "../../../utils/date";
 import { open_create_conversation } from "../../../features/chatSlice";
 import { getConversationId } from "../../../utils/chat";
+import { capitalize } from "../../../utils/string";
 
 export default function Conversation({ convo }) {
     const dispatch = useDispatch();
@@ -34,13 +35,15 @@ export default function Conversation({ convo }) {
                 <div className="w-full flex flex-col">
                     {/**Conversation name */}
                     <h1 className="font-bold flex items-center gap-x-2">
-                        {convo.name}
+                        {capitalize(convo.name)}
                     </h1>
                     {/**Conversation message */}
                     <div>
                         <div className="flex items-center gap-x-1 dark:text-dark_text_2">
                             <div className="flex-1 items-center gap-x-1 dark:text-dark_text_2">
-                                <p>{convo.latestMessage?.message}</p>
+                                <p>{convo.latestMessage?.message.length > 25 ? 
+                                `${convo.latestMessage?.message.substring(0,25)}...` 
+                                 : convo.latestMessage?.message}</p>
                             </div>
                         </div>
                     </div>
@@ -49,7 +52,9 @@ export default function Conversation({ convo }) {
             {/**Right */}
             <div className="flex flex-col gap-y-4 items-end text-xs">
                 <span className="dark:text-dark_text_2 ">
-                    {dateHandler(convo.latestMessage.createdAt)}
+                    {convo.latestMessage?.createAt 
+                    ? dateHandler(convo.latestMessage?.createAt)
+                    : "" }
                 </span>
             </div>
         </div>
