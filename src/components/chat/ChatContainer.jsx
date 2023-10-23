@@ -3,6 +3,7 @@ import ChatHeader from "./header/ChatHeader";
 import ChatMessages from "./messages/ChatMessages";
 import { useEffect } from "react";
 import { getConversationMessages } from "../../features/chatSlice";
+import { ChatActions } from "./actions";
 
 export default function ChatContainer() {
     const dispatch = useDispatch();
@@ -23,10 +24,12 @@ export default function ChatContainer() {
     <div className="relative w-full h-full border-l dark:border-l-dark_border_2 select-none overflow-hidden">
         {/**Container */}
         <div>
-            {/**Chat Header */}
+            {/**Chat Header*/}
             <ChatHeader/>
             {/**Chat messages*/}
             <ChatMessages/>
+            {/**Chat Actions*/}
+            <ChatActions/>
         </div>
     </div>
   )
