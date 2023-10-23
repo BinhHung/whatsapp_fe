@@ -18,7 +18,9 @@ export default function ChatHeader() {
                 {/**Conversation name and online status*/}
                 <div className="flex flex-col">
                     <h1 className="dark:text-white text-md font-bold">
-                        {capitalize(name.split(" ")[0])}
+                        {/*capitalize(name.split(" ")[1])*/}
+                        {capitalize(name)}
+
                     </h1>
                     <span className="text-xs dark:text-dark_svg_2">online</span>
                 </div>
