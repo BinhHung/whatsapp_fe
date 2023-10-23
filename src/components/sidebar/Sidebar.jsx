@@ -24,7 +24,10 @@ export default function Sidebar() {
           searchResults.length > 0 ? (
           <>
             {/**Search reasults */}
-            <SearchResults searchResults={searchResults}/>
+            <SearchResults 
+              searchResults={searchResults}
+              setSearchResults={setSearchResults}
+              />
           </>
           ) :  (
             <>
