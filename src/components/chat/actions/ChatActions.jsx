@@ -6,7 +6,6 @@ import { SendIcon } from "../../../svg";
 import { Attachments } from "./attachments";
 import EmojiPickerApp from "./EmojiPickerApp";
 import Input from "./Input";
-import SocketContext from "../../../context/SocketContext";
 export default function ChatActions() {
   const dispatch = useDispatch();
   const [showPicker, setShowPicker] = useState(false);
@@ -28,6 +27,8 @@ export default function ChatActions() {
     setLoading(true);
     await dispatch(sendMessage(values));
     setMessage("");
+    setLoading(false);
+    setShowPicker(false);
   };
   return (
     <form
