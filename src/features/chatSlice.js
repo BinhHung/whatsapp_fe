@@ -96,69 +96,89 @@ export const getConversationMessages = createAsyncThunk(
       }
     }
   );
-export const chatSlice = createSlice({
+  export const chatSlice = createSlice({
     name: "chat",
     initialState,
     reducers: {
-        setActiveConversation: (state, action) => {
+      setActiveConversation: (state, action) => {
         state.activeConversation = action.payload;
-        },
+      },
+      updateMessagesAndConversations: (state, action) => {
+        //update messages
+        let convo = state.activeConversation;
+        if (convo._id === action.payload.conversation._id) {
+          state.messages = [...state.messages, action.payload];
+        }
+        //update conversations
+        let conversation = {
+          ...action.payload.conversation,
+          latestMessage: action.payload,
+        };
+        let newConvos = [...state.conversations].filter(
+          (c) => c._id !== conversation._id
+        );
+        newConvos.unshift(conversation);
+        state.conversations = newConvos;
+      },
     },
     extraReducers(builder) {
-        builder
-          .addCase(getConversations.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(getConversations.fulfilled, (state, action) => {
-            state.status = "succeeded";
-            state.conversations = action.payload;
-          })
-          .addCase(getConversations.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.payload;
-          })
-          .addCase(open_create_conversation.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(open_create_conversation.fulfilled, (state, action) => {
-            state.status = "succeeded";
-            state.activeConversation = action.payload;
-          })
-          .addCase(open_create_conversation.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.payload;
-          })
-          .addCase(getConversationMessages.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(getConversationMessages.fulfilled, (state, action) => {
-            state.status = "succeeded";
-            state.messages = action.payload;
-          })
-          .addCase(getConversationMessages.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.payload;
-          })
-          .addCase(sendMessage.pending, (state, action) => {
-            state.status = "loading";
-          })
-          .addCase(sendMessage.fulfilled, (state, action) => {
-            state.status = "succeeded";
-            state.messages = [...state.messages, action.payload];
-            let conversation={...action.payload.conversation, latestMessage: action.payload}
-            let newConvos=[...state.conversations].filter(
-              (c) => c._id !== conversation._id
-            );
-            newConvos.unshift(conversation);
-            state.conversations = newConvos;
-          })
-          .addCase(sendMessage.rejected, (state, action) => {
-            state.status = "failed";
-            state.error = action.payload;
-          })
+      builder
+        .addCase(getConversations.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(getConversations.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.conversations = action.payload;
+        })
+        .addCase(getConversations.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        })
+        .addCase(open_create_conversation.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(open_create_conversation.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.activeConversation = action.payload;
+        })
+        .addCase(open_create_conversation.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        })
+        .addCase(getConversationMessages.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(getConversationMessages.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.messages = action.payload;
+        })
+        .addCase(getConversationMessages.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        })
+        .addCase(sendMessage.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(sendMessage.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.messages = [...state.messages, action.payload];
+          let conversation = {
+            ...action.payload.conversation,
+            latestMessage: action.payload,
+          };
+          let newConvos = [...state.conversations].filter(
+            (c) => c._id !== conversation._id
+          );
+          newConvos.unshift(conversation);
+          state.conversations = newConvos;
+        })
+        .addCase(sendMessage.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        });
     },
-});
+  });
 
-export const {setActiveConversation} = chatSlice.actions;
+export const {setActiveConversation, updateMessagesAndConversations} = chatSlice.actions;
 
-export default chatSlice.reducer;
+export default chatSlice.reducer; 

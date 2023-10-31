@@ -4,12 +4,13 @@ import ChatMessages from "./messages/ChatMessages";
 import { useEffect } from "react";
 import { getConversationMessages } from "../../features/chatSlice";
 import { ChatActions } from "./actions";
+import { checkOnlineStatus } from "../../utils/chat";
 
-export default function ChatContainer() {
+export default function ChatContainer({ onlineUsers, typing }) {
     const dispatch = useDispatch();
     const {activeConversation, messages} = useSelector((state) => state.chat);
     const {user} = useSelector((state) => state.user);
-    const {token} = user
+    const {token} = user;
     const values = {
         token,
         convo_id: activeConversation?._id,
@@ -19,15 +20,14 @@ export default function ChatContainer() {
             dispatch(getConversationMessages(values));
         }
     }, [activeConversation]);
-    console.log("messages", messages);
     return (
-    <div className="relative w-full h-full border-l dark:border-l-dark_border_2 select-none overflow-hidden">
+    <div className="relative w-full h-full border-l dark:border-l-dark_border_2 select-none overflow-hidden ">
         {/**Container */}
         <div>
             {/**Chat Header*/}
-            <ChatHeader/>
+            <ChatHeader online={checkOnlineStatus(onlineUsers,user, activeConversation.users)}/>
             {/**Chat messages*/}
-            <ChatMessages/>
+            <ChatMessages typing={typing}/>
             {/**Chat Actions*/}
             <ChatActions/>
         </div>

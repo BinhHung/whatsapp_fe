@@ -6,7 +6,8 @@ import { SendIcon } from "../../../svg";
 import { Attachments } from "./attachments";
 import EmojiPickerApp from "./EmojiPickerApp";
 import Input from "./Input";
-export default function ChatActions() {
+import SocketContext from "../../../context/SocketContext";
+function ChatActions({socket}) {
   const dispatch = useDispatch();
   const [showPicker, setShowPicker] = useState(false);
   const [showAttachments, setShowAttachments] = useState(false);
@@ -25,7 +26,8 @@ export default function ChatActions() {
   const SendMessageHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await dispatch(sendMessage(values));
+    let newmsg = await dispatch(sendMessage(values));
+    socket.emit("send message", newmsg.payload);
     setMessage("");
     setLoading(false);
     setShowPicker(false);
@@ -68,3 +70,10 @@ export default function ChatActions() {
   );
 }
 
+const ChatActionsWithContext=(props) =>(
+  <SocketContext.Consumer>
+    {(socket) => <ChatActions {...props} socket={socket}/>}
+  </SocketContext.Consumer>
+)
+
+export default ChatActionsWithContext;
